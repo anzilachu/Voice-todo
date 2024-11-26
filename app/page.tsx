@@ -432,7 +432,9 @@ export default function Home() {
   }
 
   const handleSignIn = () => {
-    signIn('google', { callbackUrl: '/todo' });
+    signIn('google', { 
+      callbackUrl: `${process.env.NEXTAUTH_URL}/todo` 
+    });
   };
 
   const faqs = [
