@@ -1,4 +1,10 @@
 {
-    "buildCommand": "prisma generate && next build",
-    "outputDirectory": ".next"
+  "buildCommand": "prisma generate && next build",
+  "outputDirectory": ".next",
+  "rewrites": [
+    { "source": "/manifest.json", "destination": "/api/manifest" }
+  ],
+  "env": {
+    "NEXTAUTH_URL": "https://voice-todo-rfa7-wmtx5qoax-anzils-projects.vercel.app"
   }
+}
