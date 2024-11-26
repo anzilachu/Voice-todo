@@ -433,8 +433,8 @@ export default function Home() {
 
   const handleSignIn = () => {
     signIn('google', { 
-      callbackUrl: '/todo',
-      redirect: true
+      redirect: true,
+      callbackUrl: '/todo'
     });
   };
 
@@ -635,7 +635,7 @@ export default function Home() {
               <div className="grid grid-cols-1 gap-x-8 gap-y-8 sm:gap-y-16 lg:grid-cols-2">
                 <div className="lg:pr-8 lg:pt-4">
                   <div className="lg:max-w-lg">
-                    <h2 className="text-base font-semibold leading-7 text-gray-900">Get Started</h2>
+                    <h2 className="text-2xl sm:text-3xl font-light text-gray-900 mb-4">Get Started</h2>
                     <p className="mt-2 text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight text-gray-900">
                       Voice-powered productivity
                     </p>

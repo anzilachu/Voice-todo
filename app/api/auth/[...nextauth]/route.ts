@@ -9,10 +9,16 @@ export const authOptions: AuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          prompt: "select_account"
+        }
+      }
     }),
   ],
   pages: {
     signIn: "/",
+    error: "/"
   },
   callbacks: {
     async session({ session, user }) {
@@ -22,18 +28,13 @@ export const authOptions: AuthOptions = {
       return session;
     },
     async redirect({ url, baseUrl }) {
-      // Handle redirect after sign in
-      if (url.startsWith(baseUrl)) {
-        const path = url.substring(baseUrl.length);
-        if (path.startsWith('/todo')) return url;
-        return `${baseUrl}/todo`;
-      }
-      return baseUrl;
+      // Force redirect to /todo
+      return `${baseUrl}/todo`;
     },
   },
+  debug: true,
   secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);
-
 export { handler as GET, handler as POST };
