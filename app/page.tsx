@@ -433,7 +433,8 @@ export default function Home() {
 
   const handleSignIn = () => {
     signIn('google', { 
-      callbackUrl: `${process.env.NEXTAUTH_URL}/todo` 
+      callbackUrl: '/todo',
+      redirect: true
     });
   };
 
