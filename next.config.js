@@ -9,11 +9,23 @@ const nextConfig = {
     domains: ['www.google.com', 'lh3.googleusercontent.com'],
   },
   webpack: (config) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@': __dirname,
+    config.resolve.fallback = {
+      "fs": false,
     };
     return config;
+  },
+  async headers() {
+    return [
+      {
+        source: '/manifest.json',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*',
+          },
+        ],
+      },
+    ]
   },
 }
 
