@@ -432,10 +432,7 @@ export default function Home() {
   }
 
   const handleSignIn = () => {
-    signIn('google', { 
-      redirect: true,
-      callbackUrl: '/todo'
-    });
+    signIn('google', { callbackUrl: '/todo' });
   };
 
   const faqs = [
