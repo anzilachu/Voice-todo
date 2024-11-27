@@ -16,13 +16,12 @@ export const authOptions: AuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       issuer: "https://accounts.google.com",
       profile(profile) {
-        // Convert `id` to string to avoid type mismatches
         return {
-          id: profile.id.toString(),
-          name: profile.name || profile.given_name || profile.family_name,
+          id: profile.sub,
+          name: profile.name,
           email: profile.email,
           image: profile.picture,
-        } as NextAuthUserWithStringId;
+        }
       },
     }),
   ],
@@ -33,12 +32,19 @@ export const authOptions: AuthOptions = {
       }
       return session;
     },
-    async redirect() {
-      return "/todo";
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith(baseUrl)) return url;
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      return baseUrl;
     },
+  },
+  pages: {
+    signIn: "/",
+    error: "/",
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
+
