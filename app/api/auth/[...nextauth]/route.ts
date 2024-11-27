@@ -33,18 +33,25 @@ export const authOptions: AuthOptions = {
       return session;
     },
     async redirect({ url, baseUrl }) {
+      // After sign in, go to /todo
+      if (url.includes('/api/auth/signin')) {
+        return `${baseUrl}/todo`;
+      }
+      // Handle other redirects
+      if (url.startsWith('/')) return `${baseUrl}${url}`;
       if (url.startsWith(baseUrl)) return url;
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
       return baseUrl;
     },
   },
   pages: {
     signIn: "/",
-    error: "/",
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
+
+export { handler as GET, handler as POST };
+
 
